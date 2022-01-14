@@ -1,0 +1,74 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url("bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+}
+
+.main {
+    width: 80vw;
+    height: 100vh;
+    background-color: rgba(128, 128, 128, 0.503);
+}
+
+.side {
+    width: 20vw;
+    height: 100vh;
+    background-color: rgba(56, 56, 56, 0.503);
+}
+
+.clock {
+    height: 15%;
+    padding: 24px;
+    background-color: rgb(56, 56, 56);
+    display: flex;
+    justify-content: space-around;
+}
+
+.h1, .h2, .m1, .m2 {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.h1 div, .h2 div, .m1 div, .m2 div {
+    display: flex;
+}
+
+.hh1, .hh2, .hh3 {
+    background-color: rgb(57, 220, 12);
+    border-radius: 8px;
+    margin: 1px;
+    width: 40px;
+    height: 4px;
+    opacity: 0.05;
+}
+
+.hv1, .hv3 {
+    background-color: rgb(57, 220, 12);
+    border-radius: 8px;
+    margin: 1px;
+    height: 40px;
+    width: 4px;
+    opacity: 0.05;
+}
+
+.hv2, .hv4 {
+    background-color: rgb(57, 220, 12);
+    border-radius: 8px;
+    margin: 1px;
+    margin-left: 30px;
+    height: 40px;
+    width: 4px;
+    opacity: 0.05;
+}
+
+.bet {
+    padding-top: 10px;
+}
+.bet div {
+    margin-top: 25px;
+    height: 5px;
+    opacity: 1;
+}
