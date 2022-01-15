@@ -1,10 +1,12 @@
 body {
     margin: 0;
     padding: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background-image: url("bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
+    overflow: hidden;
 }
 
 .main {
@@ -22,6 +24,7 @@ body {
 .clock {
     height: 15%;
     padding: 24px;
+    margin: 0;
     background-color: rgb(56, 56, 56);
     display: flex;
     justify-content: space-around;
@@ -71,4 +74,109 @@ body {
     margin-top: 25px;
     height: 5px;
     opacity: 1;
+}
+
+.todo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    background-color: rgba(64, 130, 16, 0.435);
+    color: white;
+    height: 78.5%;
+    margin: 0;
+}
+
+.todo h2 {
+    color: rgb(225, 221, 221);
+    margin: 0;
+    margin-bottom: 8px;
+    padding: 16px;
+    background-color: rgb(32, 149, 14);
+}
+
+.todo div {
+    height: 90%;
+}
+
+.todo ul {
+    overflow: auto;
+    height: 80%;
+    text-align: left;
+    padding: 0;
+}
+
+.add {
+    font-size: 16px;
+    font-weight: bold;
+    background-color: rgb(32, 149, 14);;
+    color: white;
+    padding: 12px;
+    border: white 4px solid;
+    cursor: pointer;
+}
+
+.item {
+    list-style: none;
+    background-color: rgba(128, 128, 128, 0.884);
+    padding: 8px;
+    margin: 4px;
+}
+
+.item div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.checked {
+    text-decoration: line-through;
+    opacity: 0.4;
+}
+
+.form {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(59, 59, 59, 0.918);
+    color: white;
+}
+
+.form label, .form input, .form div {
+    width: 50%;
+    margin-bottom: 8px;
+}
+
+.form input {
+    padding: 8px;
+    font-size: 16px;
+    width: 48%;
+    margin-bottom: 20px;
+    
+}
+
+.form div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form div button {
+    width: 49%;
+}
+
+.close {
+    font-size: 16px;
+    font-weight: bold;
+    background-color: rgb(149, 18, 14);;
+    color: white;
+    padding: 12px;
+    border: white 4px solid;
+    cursor: pointer;
+}
+
+.show {
+    display: flex;
 }

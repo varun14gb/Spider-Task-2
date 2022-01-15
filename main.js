@@ -336,3 +336,96 @@ setMinutes = (minutes) => {
             break;
     }
 }
+
+//show form
+showForm = () => {
+    document.querySelector(".form").classList.add("show");
+}
+
+//hide form
+hideForm = () => {
+    document.querySelector(".form").classList.remove("show");
+}
+
+//remove item
+removeItem = (title, time) => {
+    var tasks = localStorage.getItem("tasks");
+    tasks = JSON.parse(tasks);
+    tasks = tasks.filter(task => !(task.date === new Date().toISOString().split('T')[0] && task.time === time && task.title === title));
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+
+    loadItems();
+}
+
+//load List items
+loadItems = () => {
+    var tasks = localStorage.getItem("tasks");
+    if (tasks) {
+        var list = document.querySelector(".list");
+        while (list.firstChild) {
+            list.firstChild.remove()
+        }
+        var tasks = localStorage.getItem("tasks");
+        tasks = JSON.parse(tasks);
+        tasks = tasks.filter(task => task.date === new Date().toISOString().split('T')[0]);
+        tasks.forEach(element => {
+            var li = document.createElement("li");
+            var div = document.createElement("div");
+            var span1 = document.createElement("span");
+            var span2 = document.createElement("span");
+            var text = document.createTextNode(element.title);
+            span1.appendChild(text);
+            div.appendChild(span1);
+            text = document.createTextNode(element.time);
+            span2.appendChild(text);
+            div.appendChild(span2);
+            li.appendChild(div);
+            li.className = "item";
+
+            li.addEventListener("click", (e) => {
+                removeItem(e.target.children[0].innerHTML, e.target.children[1].innerHTML);
+            })
+
+            list.appendChild(li);
+        });
+    }
+}
+
+//Add Item to todo list
+addItem = () => {
+    var task = document.querySelector("#task").value;
+    var date = document.querySelector("#date").value;
+    var time = document.querySelector("#time").value;
+
+    if (task === '') {
+        alert("Task should not be empty");
+    } else if (date === '') {
+        alert("Fill the date!");
+    } else if (time === '') {
+        alert("Fill the time!");
+    } else if (date < new Date().toISOString().split('T')[0]) {
+        alert("Cannot add task in previous date")
+    } else {
+        var tasks = localStorage.getItem("tasks");
+        var data = {
+            title: task,
+            date,
+            time
+        };
+
+        if (!tasks) {
+            localStorage.setItem("tasks", JSON.stringify([data]));
+        } else {
+            tasks = JSON.parse(tasks);
+            tasks.push(data);
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+        }
+
+        loadItems();
+
+        hideForm();
+    }
+}
+
+loadItems();

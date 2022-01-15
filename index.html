@@ -10,7 +10,8 @@
 </head>
 
 <body>
-    <div class="main"></div>
+    <div class="main">
+    </div>
     <div class="side">
         <div class="clock">
             <div class="h1">
@@ -70,7 +71,26 @@
                 <div class="hh3"></div>
             </div>
         </div>
-        <div class="todo"></div>
+        <div class="todo">
+            <div>
+                <h2>TODO List for Today</h2>
+                <ul class="list">
+                </ul>
+            </div>
+            <button class="add" onclick="showForm()">Add</button>
+        </div>
+    </div>
+    <div class="form">
+        <label for="task">Task</label>
+        <input id="task" type="text" placeholder="Enter Task here" required />
+        <label for="date">Date</label>
+        <input id="date" type="date" required />
+        <label for="time">Deadline</label>
+        <input id="time" type="time" required />
+        <div>
+            <button class="close" onclick="hideForm()">Close</button>
+            <button class="add" onclick="addItem()">Add Task</button>
+        </div>
     </div>
     <script src="main.js"></script>
 </body>
