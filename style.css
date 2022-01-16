@@ -229,3 +229,37 @@ li button {
     color: white;
     border: 1px solid black;
 }
+
+@media only screen and (max-width: 768px) {
+    body {
+        flex-direction: column-reverse;
+        height: 100%;
+        overflow: scroll;
+    }
+
+    .main {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+    
+    .side {
+        width: 100%;
+        margin-top: 0;
+        height: 100%;
+    }
+
+    .clock {
+        height: 100%;
+    }
+
+    .todo {
+        height: 100%;
+    }
+
+    .form {
+        height: 100%;
+        width: 100%; 
+    }
+  }
