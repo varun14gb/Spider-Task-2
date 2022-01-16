@@ -12,7 +12,7 @@ body {
 .main {
     width: 80vw;
     height: 100vh;
-    background-color: rgba(128, 128, 128, 0.503);
+    background-color: rgba(62, 62, 62, 0.673);
 }
 
 .side {
@@ -179,4 +179,44 @@ body {
 
 .show {
     display: flex;
+}
+
+.main {
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+}
+
+table {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.735);
+}
+
+th {
+    background-color: yellowgreen;
+    color: white;
+}
+
+tr {
+    color: black;
+    height: 70px;
+    background-color: white;
+}
+
+#month {
+    padding: 4px;
+}
+
+.change {
+    background-color: yellowgreen;
+    color: white;
+    border: 2px solid white;
+    padding: 8px;
+    font-weight: bold;
+}
+
+.selected {
+    background-color: rgb(173, 230, 164);
 }

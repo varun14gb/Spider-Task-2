@@ -11,6 +11,24 @@
 
 <body>
     <div class="main">
+        <div>
+            <h1 class="calhead"></h1>
+            <input id="month" type="month">
+            <button class="change" onclick="setCalendar()">Change</button>
+            <br></br>
+        </div>
+        <br></br>
+        <table>
+            <tr>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+                <th>Sun</th>
+            </tr>
+        </table>
     </div>
     <div class="side">
         <div class="clock">
@@ -73,7 +91,7 @@
         </div>
         <div class="todo">
             <div>
-                <h2>TODO List for Today</h2>
+                <h2>TODO List for <br /> <span class="todohead"></span></h2>
                 <ul class="list">
                 </ul>
             </div>

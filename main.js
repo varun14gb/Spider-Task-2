@@ -347,6 +347,8 @@ hideForm = () => {
     document.querySelector(".form").classList.remove("show");
 }
 
+var date = new Date().toISOString().split('T')[0];
+
 //remove item
 removeItem = (title, time) => {
     var tasks = localStorage.getItem("tasks");
@@ -360,6 +362,8 @@ removeItem = (title, time) => {
 
 //load List items
 loadItems = () => {
+    var headin = document.querySelector(".todohead");
+    headin.innerHTML = `${date}`;
     var tasks = localStorage.getItem("tasks");
     if (tasks) {
         var list = document.querySelector(".list");
@@ -368,7 +372,7 @@ loadItems = () => {
         }
         var tasks = localStorage.getItem("tasks");
         tasks = JSON.parse(tasks);
-        tasks = tasks.filter(task => task.date === new Date().toISOString().split('T')[0]);
+        tasks = tasks.filter(task => task.date === date);
         tasks.forEach(element => {
             var li = document.createElement("li");
             var div = document.createElement("div");
@@ -422,10 +426,85 @@ addItem = () => {
             localStorage.setItem("tasks", JSON.stringify(tasks));
         }
 
-        loadItems();
+        loadItems(date);
 
         hideForm();
     }
 }
 
 loadItems();
+
+getDaysInMonth = (month, year) => {
+    var date = new Date(year, month, 1);
+    var days = [];
+    while (date.getMonth() === month) {
+        days.push(new Date(date));
+        date.setDate(date.getDate() + 1);
+    }
+    return days;
+}
+
+fillCalendar = (month, year) => {
+    var table = document.querySelector("table");
+    var days = getDaysInMonth(month, year);
+
+    var heading = document.querySelector(".calhead");
+
+    heading.innerHTML = `${days[0].toLocaleString('default', { month: 'long' })} ${days[0].getFullYear()}`;
+
+    while (table.childNodes.length > 2) {
+        table.removeChild(table.lastChild);
+    }
+
+    var count = 0;
+    var trow = document.createElement("tr");
+    for (var i = 0; i < days.length; i++) {
+        if (i == 0) {
+            for (var j = 0; j < days[0].getDay() - 1; j++) {
+                var td = document.createElement("td");
+                trow.appendChild(td);
+                count++;
+            }
+        }
+        count++;
+        var td = document.createElement("td");
+        var text = document.createTextNode(days[i].getDate());
+        td.appendChild(text);
+
+        td.addEventListener("click", (e) => {
+            date = `${year}-${month + 1}-${e.target.innerHTML}`;
+            loadItems();
+            fillCalendar(month, year);
+        })
+
+        if (days[i].getDate() == date.split("-")[2] && year == date.split("-")[0] && month == parseInt(date.split("-")[1]) - 1) {
+            td.className = "selected";
+        }
+        trow.appendChild(td);
+        if (i + 1 === days.length && days[i].getDay() % 7 != 0) {
+            for (var j = days[i].getDay(); j < 7; j++) {
+                var td = document.createElement("td");
+                trow.appendChild(td);
+                count++;
+            }
+            table.appendChild(trow);
+        }
+        if (count % 7 === 0) {
+            table.appendChild(trow);
+            trow = document.createElement("tr");
+        }
+    }
+}
+
+setCalendar = () => {
+    var data = document.querySelector("#month").value;
+    if (data === '') {
+        alert("Select month and year before clicking the button");
+    } else {
+        var month = data.split("-")[1];
+        var year = data.split("-")[0];
+        fillCalendar(parseInt(month) - 1, parseInt(year));
+    }
+}
+
+fillCalendar(new Date().getMonth(), new Date().getFullYear());
