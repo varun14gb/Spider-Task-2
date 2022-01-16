@@ -353,7 +353,12 @@ var date = new Date().toISOString().split('T')[0];
 removeItem = (title, time) => {
     var tasks = localStorage.getItem("tasks");
     tasks = JSON.parse(tasks);
-    tasks = tasks.filter(task => !(task.date === new Date().toISOString().split('T')[0] && task.time === time && task.title === title));
+    tasks = tasks.map(task => {
+        if (task.date === date && task.time === time && task.title === title) {
+            task.done = !task.done;
+        }
+        return task;
+    })
 
     localStorage.setItem("tasks", JSON.stringify(tasks));
 
@@ -386,6 +391,9 @@ loadItems = () => {
             div.appendChild(span2);
             li.appendChild(div);
             li.className = "item";
+            if (element.done == true) {
+                li.classList.add("checked");
+            }
 
             li.addEventListener("click", (e) => {
                 removeItem(e.target.children[0].innerHTML, e.target.children[1].innerHTML);
@@ -415,7 +423,8 @@ addItem = () => {
         var data = {
             title: task,
             date,
-            time
+            time,
+            done: false
         };
 
         if (!tasks) {
@@ -472,7 +481,7 @@ fillCalendar = (month, year) => {
         td.appendChild(text);
 
         td.addEventListener("click", (e) => {
-            date = `${year}-${month + 1}-${e.target.innerHTML}`;
+            date = `${year}-${month < 9 ? '0' : ''}${month + 1}-${e.target.innerHTML}`;
             loadItems();
             fillCalendar(month, year);
         })
