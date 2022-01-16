@@ -349,7 +349,7 @@ hideForm = () => {
 
 var date = new Date().toISOString().split('T')[0];
 
-//remove item
+//Mark as done or undone
 removeItem = (title, time) => {
     var tasks = localStorage.getItem("tasks");
     tasks = JSON.parse(tasks);
@@ -359,6 +359,17 @@ removeItem = (title, time) => {
         }
         return task;
     })
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+
+    loadItems();
+}
+
+//remove item or delete from local storage
+deleteItem = (title, time) => {
+    var tasks = localStorage.getItem("tasks");
+    tasks = JSON.parse(tasks);
+    tasks = tasks.filter(task => !(task.date === date && task.time === time && task.title === title));
 
     localStorage.setItem("tasks", JSON.stringify(tasks));
 
@@ -390,13 +401,26 @@ loadItems = () => {
             span2.appendChild(text);
             div.appendChild(span2);
             li.appendChild(div);
+            var div1 = document.createElement("div");
+            var span3 = document.createElement("button");
+            var span4 = document.createElement("button");
+            var text1 = document.createTextNode("Mark/Unmark");
+            var text2 = document.createTextNode("Delete");
+            span3.appendChild(text1);
+            span4.appendChild(text2);
+            div1.appendChild(span3);
+            div1.appendChild(span4);
+            li.appendChild(div1);
             li.className = "item";
             if (element.done == true) {
                 li.classList.add("checked");
             }
 
-            li.addEventListener("click", (e) => {
-                removeItem(e.target.children[0].innerHTML, e.target.children[1].innerHTML);
+            span3.addEventListener("click", (e) => {
+                removeItem(e.target.parentElement.parentElement.firstChild.children[0].innerHTML, e.target.parentElement.parentElement.firstChild.children[1].innerHTML);
+            })
+            span4.addEventListener("click", (e) => {
+                deleteItem(e.target.parentElement.parentElement.firstChild.children[0].innerHTML, e.target.parentElement.parentElement.firstChild.children[1].innerHTML);
             })
 
             list.appendChild(li);
