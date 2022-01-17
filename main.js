@@ -1,4 +1,3 @@
-
 //Making Clock Functionable
 
 setTime = () => {
@@ -451,6 +450,20 @@ addItem = () => {
             done: false
         };
 
+        //Adding a notification
+        if (granted) {
+            setTimeout(() => {
+                new Notification("TODO TASK", {
+                    body: data.title,
+                    timestamp: new Date(`${date}T${time}`).getTime()
+                });
+            }, new Date(`${date}T${time}`).getTime() - Date.now())
+            // const notification = new Notification("TODO TASK", {
+            //     body: data.title,
+            //     timestamp: new Date(`${date}T${time}`).getTime()
+            // });
+        }
+
         if (!tasks) {
             localStorage.setItem("tasks", JSON.stringify([data]));
         } else {
@@ -505,7 +518,7 @@ fillCalendar = (month, year) => {
         td.appendChild(text);
 
         td.addEventListener("click", (e) => {
-            date = `${year}-${month < 9 ? '0' : ''}${month + 1}-${e.target.innerHTML}`;
+            date = `${year}-${month < 9 ? '0' : ''}${month + 1}-${e.target.innerHTML < 10 ? '0' : ''}${e.target.innerHTML}`;
             loadItems();
             fillCalendar(month, year);
         })
@@ -541,3 +554,14 @@ setCalendar = () => {
 }
 
 fillCalendar(new Date().getMonth(), new Date().getFullYear());
+
+//getting notification permission
+let granted = false;
+(async () => {
+    if (Notification.permission === 'granted') {
+        granted = true;
+    } else if (Notification.permission !== 'denied') {
+        let permission = await Notification.requestPermission();
+        granted = permission === 'granted' ? true : false;
+    }
+})();

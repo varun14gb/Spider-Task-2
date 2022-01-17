@@ -8,7 +8,7 @@
 - [x] 5. The task would be evaluated based on the students' creativity, website UI design, and the application's overall functioning.
 
 ## Hacker mode: (40 Points)
-- [ ] 1. Add a tracker with the Todo list, which would notify the user if the task is pending or completed. The tasks should contain a deadline time. Have a separate pending list for the day's task.
+- [x] 1. Add a tracker with the Todo list, which would notify the user if the task is pending or completed. The tasks should contain a deadline time. Have a separate pending list for the day's task.
 - [ ] 2. Add an option to view the Clock in either analog or digital format. The Analog clock should be shaped like a circle, and all the numbers should be aligned appropriately. Only HTML and CSS should be used for the styling of the Clock.
 - [ ] 3. Multiple user functionality should be present. Make sure the different users have their data stored separately and shown correctly on the Website.
 - [ ] 4. The Clock should have additional user interactivity. Add sound effects, options to change colour, dimensions of the clock hands as per user's input, etc. Add an option for the user to modify the clock timing as well. (Customisation)
